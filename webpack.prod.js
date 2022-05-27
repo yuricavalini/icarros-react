@@ -1,14 +1,18 @@
 // const { DefinePlugin } = require('webpack');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+
 const common = require('./webpack.common');
 const { merge } = require('webpack-merge');
 
 module.exports = merge(common, {
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js(x?)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -16,7 +20,7 @@ module.exports = merge(common, {
         test: /\.(scss|sass)$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -35,20 +39,21 @@ module.exports = merge(common, {
       },
     ],
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    devMiddleware: {
-      writeToDisk: true,
-    },
-    static: {
-      directory: './public',
-    },
-    historyApiFallback: true,
-    port: 8080,
+  externals: {
+    react: 'React',
+    axios: 'axios',
+    'react-dom': 'ReactDOM',
+    'react-router-dom': 'ReactRouterDOM',
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './template.dev.html',
+      template: './template.prod.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'main-bundle-[hash].css',
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './public/favicon.jpeg',
     }),
   ],
 });
