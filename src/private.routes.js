@@ -2,7 +2,11 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
-const PrivateRoute = ({ children, path: Path, ...rest }) => {
+const PrivateRoute = ({ children, element: Element, path: Path, ...rest }) => {
+  console.warn(children);
+  console.warn(Element);
+  console.warn(Path);
+  console.warn(rest);
   const isLoggedIn = localStorage.getItem('@IcarrosToken');
   const isSectionActive = () => {
     if (isLoggedIn === null) {
