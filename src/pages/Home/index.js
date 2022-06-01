@@ -7,6 +7,8 @@ import { HomeSection } from './style';
 
 import Card from '@/assets/cars/1.png';
 
+import CardComponent from '../../components/Card';
+
 const Home = () => {
   const [isLoad, setIsLoad] = useState(false);
 
@@ -44,6 +46,9 @@ const Home = () => {
           </>
         )}
         <button onClick={Test}>Clique me</button>
+
+        <CardComponent imgSrc={Card} imgAlt="Card Image" />
+        <CardComponent imgSrc={Card} imgAlt="Card Image" />
       </HomeSection>
       <Footer />
     </>
