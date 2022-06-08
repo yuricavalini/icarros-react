@@ -2,19 +2,17 @@ import React from 'react';
 
 import { CardContent } from './style';
 
-const CardComponent = ({ imgSrc, imgAlt, firstBtnLabel = 'Button 1', firstBtnAction, firstBtnType, secondBtnLabel = 'Button 2', secondBtnAction, secondBtnType }) => {
+import SimpleButton from '../SimpleButton';
+
+const CardComponent = ({ imgSrc, imgAlt }) => {
   return (
     <CardContent>
       <figure>
         <img src={imgSrc} alt={imgAlt} width={200} height={'auto'} />
       </figure>
       <div className="btn-wrapper">
-        <button onClick={firstBtnAction} className={firstBtnType}>
-          {firstBtnLabel}
-        </button>
-        <button onClick={secondBtnAction} className={secondBtnType}>
-          {secondBtnLabel}
-        </button>
+        <SimpleButton type="button" label="Button 1" width={'100%'}></SimpleButton>
+        <SimpleButton type="button" label="Button 2" width={'100%'}></SimpleButton>
       </div>
     </CardContent>
   );

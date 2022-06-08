@@ -4,29 +4,30 @@ import { useNavigate } from 'react-router-dom';
 
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import SimpleButton from '@/components/SimpleButton';
 
 import { authAPI } from '@/service/api';
 
 import { Container } from './style';
 
+import Card from '@/assets/cars/1.png';
+
+import { menuItem } from '../../Constants/index';
+
 const Login = () => {
   const [data, setData] = useState();
-  // email@tester21122222.com
   // test@test.com
   // 123456
   const navigate = useNavigate();
 
   const submitLogin = (e) => {
     e.preventDefault();
-    console.log(data);
     authAPI
       .post('session', data)
       .then((res) => {
-        console.warn(res);
         const { token } = res.data;
         localStorage.setItem('@IcarrosToken', token);
 
-        console.warn(token);
         toast('Login realizado com sucesso.', {
           type: 'success',
           onClose: () => {
@@ -44,14 +45,16 @@ const Login = () => {
 
   return (
     <>
-      <Nav />
+      <Nav logo={Card} item={menuItem} />
       <Container>
-        <h1>Login</h1>
-        <form onSubmit={submitLogin}>
-          <input type="text" placeholder="Usuário" onChange={(e) => setData({ ...data, email: e.target.value })} />
-          <input type="password" placeholder="Senha" onChange={(e) => setData({ ...data, password: e.target.value })} />
-          <input type="submit" value="Logar" />
-        </form>
+        <div className="container-helper">
+          <h1>Login</h1>
+          <form onSubmit={submitLogin}>
+            <input type="text" placeholder="Usuário" onChange={(e) => setData({ ...data, email: e.target.value })} />
+            <input type="password" placeholder="Senha" onChange={(e) => setData({ ...data, password: e.target.value })} />
+            <SimpleButton type="submit" label="Logar"></SimpleButton>
+          </form>
+        </div>
       </Container>
       <Footer />
     </>

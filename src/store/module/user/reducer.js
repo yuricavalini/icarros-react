@@ -8,8 +8,6 @@ const AllUsers = createSlice({
   initialState,
   reducers: {
     addNewUser: (state, action) => {
-      console.log('Payload', action.payload);
-      console.log('Estado pela action', state.users);
       state.users = [...state.users, action.payload];
     },
   },

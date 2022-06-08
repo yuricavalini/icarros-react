@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import Lottie from 'lottie-react-web';
 import { useNavigate } from 'react-router-dom';
@@ -9,12 +9,15 @@ import { api } from '@/service/api';
 import { useDispatch } from 'react-redux';
 import { addNewUser } from '@/store/module/user/reducer';
 
-import * as animation from '@/animation/sending.json';
+import * as animation1 from '@/animation/sending.json';
+import * as animation2 from '@/animation/loading-car.json';
 
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import SimpleButton from '@/components/SimpleButton';
 
 import { FormContainer, ContactCard } from './styles';
+
 import Cart from '@/assets/cars/1.png';
 
 import { menuItem } from '@/Constants';
@@ -38,28 +41,28 @@ const Contact = () => {
     e.preventDefault();
     setIsSending(true);
 
-    const { name, email, phone } = data;
+    localStorage.setItem('@users', JSON.stringify([...allUsers, data]));
+    // setTimeout(() => {
+    //   setIsSending(false);
+    // }, 1000);
 
-    localStorage.setItem('@users', JSON.stringify([...allUsers, { name, email, phone }]));
-    setTimeout(() => {
-      setIsSending(false);
-    }, 1000);
-
-    // api.post('', data)
-    //   .then(res => {
-    //     toast('Mensagem enviada com sucesso', {
-    //       onOpen: () => navigate('/'),
-    //       type: 'success'
-    //     })
-    //   })
-    //   .catch( err => {
-    //     toast('Ooops, falha no engano', {
-    //       type: 'error',
-    //     })
-    //   })
-    //   .finally( () => {
-    //     setIsSending(false)
-    //   })
+    api
+      .post('', data)
+      .then((res) => {
+        toast('Mensagem enviada com sucesso', {
+          type: 'success',
+        });
+      })
+      .catch((err) => {
+        toast('Ooops, falha no engano', {
+          type: 'error',
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setIsSending(false);
+        }, 4000);
+      });
   };
 
   useEffect(() => {
@@ -70,30 +73,30 @@ const Contact = () => {
     <>
       <Nav logo={Cart} item={menuItem} />
       <FormContainer>
-        <ContactCard>
-          <form onSubmit={sendData}>
-            <input type="text" placeholder="informe seu nome" onChange={(e) => setData({ ...data, name: e.target.value })} />
-            <input type="text" placeholder="Informe seu email" onChange={(e) => setData({ ...data, email: e.target.value })} />
-            <input type="text" placeholder="Informe seu telefone" onChange={(e) => setData({ ...data, phone: e.target.value })} />
-            {!isSending ? (
-              <>
-                <input type="submit" value="Enviar" />
-              </>
-            ) : (
-              <>
-                <Lottie
-                  options={{
-                    width: '30%',
-                    height: '30%',
-                    animationData: animation,
-                  }}
-                />
-              </>
-            )}
-          </form>
+        {!isSending ? (
+          <>
+            <h1>Formulário de Contato</h1>
 
-          <div>{allUsers.length}</div>
-        </ContactCard>
+            <ContactCard>
+              <form onSubmit={sendData}>
+                <input type="text" placeholder="Informe seu nome" onChange={(e) => setData({ ...data, name: e.target.value })} />
+                <input type="text" placeholder="Informe seu email" onChange={(e) => setData({ ...data, email: e.target.value })} />
+                <input type="text" placeholder="Informe seu telefone" onChange={(e) => setData({ ...data, phone: e.target.value })} />
+                <SimpleButton type="submit" width={'100%'} label="Enviar"></SimpleButton>
+              </form>
+            </ContactCard>
+          </>
+        ) : (
+          <>
+            <Lottie
+              options={{
+                width: '30%',
+                height: '30%',
+                animationData: animation2,
+              }}
+            />
+          </>
+        )}
       </FormContainer>
       <Footer />
     </>
