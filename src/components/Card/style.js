@@ -27,11 +27,6 @@ export const CardContent = styled.article`
 
     img {
       width: 100%;
-      transition: transform 0.2s ease-in;
-
-      &:hover {
-        transform: scale(1.1);
-      }
     }
   }
 

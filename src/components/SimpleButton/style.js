@@ -8,7 +8,6 @@ export const StyledButton = styled.button`
   background-color: #03a9f4;
   border: 1px solid transparent;
   box-shadow: 2px 4px 6px rgba(79, 79, 79, 0.2);
-  border-radius: 100px;
   padding: 10px;
   transition: box-shadow 0.2s ease-in;
 
@@ -16,12 +15,11 @@ export const StyledButton = styled.button`
 
   &:hover {
     box-shadow: 2px 4px 6px rgba(79, 79, 79, 0.5);
+    background-color: #03a9f4cc;
   }
 
   &:active {
-    transition: all 0.1s ease-in;
+    transition: all 0.2s ease-in;
     background-color: #0090d0;
-    box-shadow: 2px 4px 6px rgba(79, 79, 79, 0.3);
-    transform: translateY(2px);
   }
 `;
