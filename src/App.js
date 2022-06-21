@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from './routes';
 import { Provider } from 'react-redux';
-import { hotjar, hjid, hjsv } from 'react-hotjar';
+import { hotjar } from 'react-hotjar';
 import TagManager from 'react-gtm-module';
 
 import store from '@/store';
