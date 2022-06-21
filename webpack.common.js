@@ -15,5 +15,11 @@ module.exports = {
       '@': path.join(__dirname, 'src'),
     },
   },
-  plugins: [new CleanWebpackPlugin(), new Dotenv()],
+  // https://github.com/mrsteele/dotenv-webpack/issues/121#issuecomment-389627452
+  plugins: [
+    new CleanWebpackPlugin(),
+    new Dotenv({
+      path: path.resolve(__dirname, './.env'),
+    }),
+  ],
 };
