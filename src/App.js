@@ -12,10 +12,10 @@ import GlobalStyle from './globalStyle';
 
 import 'react-toastify/ReactToastify.min.css';
 
-console.warn(process.env.HJID);
-console.warn(process.env.HJSV);
-console.warn(process.env.HJ_USERID);
-console.warn(process.env.TAG_MANAGER_ID);
+// console.warn(process.env.HJID);
+// console.warn(process.env.HJSV);
+// console.warn(process.env.HJ_USERID);
+// console.warn(process.env.TAG_MANAGER_ID);
 
 // hotjar configs
 hotjar.initialize(process.env.HJID, process.env.HJSV);

@@ -20,7 +20,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new Dotenv({
-      path: path.resolve(__dirname, './.env'),
+      path: path.join(__dirname, './.env'),
       safe: true,
       allowEmptyValues: true,
       systemvars: true,
