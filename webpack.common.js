@@ -18,7 +18,7 @@ module.exports = {
   // https://github.com/mrsteele/dotenv-webpack/issues/121#issuecomment-389627452
   plugins: [
     new CleanWebpackPlugin(),
-    Dotenv({
+    new Dotenv({
       path: path.resolve(__dirname, './.env'),
     }),
   ],
