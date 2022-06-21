@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from './routes';
 import { Provider } from 'react-redux';
-import { hotjar } from 'react-hotjar';
+import { hotjar, hjid, hjsv } from 'react-hotjar';
 
 import store from '@/store';
 
@@ -16,8 +16,8 @@ console.warn(process.env.HJSV);
 console.warn(process.env.HJ_USERID);
 
 // hotjar configs
-hotjar.initialize(process.env.HJID, process.env.HJSV);
-hotjar.identify(process.env.HJ_USERID, {
+hotjar.initialize(hjid, hjsv);
+hotjar.identify(hjid, {
   userProperty: 'value',
 });
 
@@ -25,6 +25,10 @@ hotjar.event('button-click');
 hotjar.stateChange('/');
 
 console.log(process.env.REACT_APP_NAME);
+
+const tagManagerArgs = {
+  gtmId: process.env.TAGMANAGER,
+};
 
 const App = () => {
   return (
